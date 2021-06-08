@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/visuals"
+        android:title="@string/visual"
+        android:icon="@drawable/visual"
+        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
+        tools:ignore="AppCompatResource">
+             <menu>
+                <item android:id="@+id/action_maps"
+                    android:title="@string/action_maps"
+                    android:icon="@drawable/google"
+                    app:showAsAction="ifRoom"/>
+                <item android:id="@+id/action_plots"
+                    android:title="@string/action_plots"
+                    android:icon="@drawable/plot"
+                    app:showAsAction="ifRoom"/>
+                 <item android:id="@+id/action_analyse"
+                     android:title="@string/action_analyse"
+                     android:icon="@drawable/icon_a"
+                     app:showAsAction="ifRoom"/>
+                <item android:id="@+id/action_compare"
+                    android:title="@string/action_compare"
+                    android:icon="@drawable/icon_c"
+                    app:showAsAction="ifRoom"/>
+                 <item android:id="@+id/action_playback"
+                     android:title="@string/action_playback"
+                     android:icon="@drawable/icon_p"
+                     app:showAsAction="ifRoom"/>
+            </menu>
+    </item>
+
+    <item
+        android:id="@+id/edit"
+        android:title="@string/edit"
+        android:icon="@drawable/edit"
+        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
+        tools:ignore="AppCompatResource">
+        <menu>
+            <item android:id="@+id/action_fix_gps"
+                android:title="@string/action_fix_gps"
+                android:icon="@drawable/google"
+                app:showAsAction="never"/>
+            <item android:id="@+id/action_fix_alt"
+                android:title="@string/action_fix_alt"
+                android:icon="@drawable/google"
+                app:showAsAction="never"/>
+            <item android:id="@+id/action_get_temp"
+                android:title="@string/action_get_temp"
+                android:icon="@drawable/open_logo"
+                app:showAsAction="never"/>
+            <item android:id="@+id/action_delete"
+                android:title="@string/action_delete"
+                android:icon="@drawable/icon_d"
+                app:showAsAction="never"/>
+            <item android:id="@+id/action_edit"
+                android:title="@string/action_edit"
+                android:icon="@drawable/icon_e"
+                app:showAsAction="never"/>
+            <item android:id="@+id/action_split"
+                android:title="@string/action_split"
+                android:icon="@drawable/icon_s"
+                app:showAsAction="never"/>
+            <item android:id="@+id/action_waypoints"
+                android:title="@string/action_waypoints_map"
+                android:icon="@drawable/icon_w"
+                app:showAsAction="never"/>
+            <item android:id="@+id/action_combine"
+                android:title="@string/action_combine"
+                android:icon="@drawable/icon_c"
+                app:showAsAction="never"/>
+
+        </menu>
+    </item>
+
+    <item android:id="@+id/action_export"
+        android:title="@string/action_export"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_import"
+        android:title="@string/action_import"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_import_keys"
+        android:title="@string/action_import_keys"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_export_keys"
+        android:title="@string/action_export_keys"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_repair"
+        android:title="@string/action_repair"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_follow"
+        android:title="@string/action_follow"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_copy"
+        android:title="@string/action_copy"
+        app:showAsAction="never"/>
+
+</menu>

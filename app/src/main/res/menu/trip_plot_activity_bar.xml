@@ -1,0 +1,91 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/action_map_forward"
+        android:title="@string/action_map_play"
+        android:icon="@drawable/playf_slow"
+        android:showAsAction="always"
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource">
+    </item>
+
+    <item
+        android:id="@+id/action_map_pause"
+        android:title="@string/action_map_pause"
+        android:icon="@drawable/pause"
+        android:showAsAction="always"
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource">
+    </item>
+
+    <item
+        android:id="@+id/action_map_reverse"
+        android:title="@string/action_map_reverse"
+        android:icon="@drawable/playr_slow"
+        android:showAsAction="always"
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource">
+    </item>
+
+    <item android:id="@+id/action_accuracy_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_accuracy_plot"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_elevation_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_elevation_plot"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_battery_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_battery_plot"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_gradient_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_gradient_plot"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_pace_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_pace_plot"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_satinfo_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_satinfo_plot"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_satellites_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_satellites_plot"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_speed_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_speed_plot"/>
+    <item android:id="@+id/action_speed_segment_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_speed_segment_plot"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_power_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_power_plot"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_power_histo_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_power_histo_plot"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_vam_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_vam_plot"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_head_wind_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_head_wind_plot"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_reading_time_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_reading_time_plot"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_reading_distance_plot"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_reading_distance_plot"
+        app:showAsAction="ifRoom" />
+</menu>

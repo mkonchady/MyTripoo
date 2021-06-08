@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_category_all"
+        android:title="@string/category_all"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_category_cycling"
+        android:title="@string/category_cycling"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_category_jogging"
+        android:title="@string/category_jogging"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_category_walking"
+        android:title="@string/category_walking"
+        app:showAsAction="never"/>
+
+</menu>

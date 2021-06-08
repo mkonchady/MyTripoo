@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id= "@+id/tablelayout"
+        android:layout_width= "wrap_content"
+        android:layout_height= "wrap_content"
+        android:layout_margin="0sp">
+
+    <TableRow>
+        <TextView
+            android:id="@+id/markerView1"
+            android:text=""
+            android:layout_width="0dip"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:stretchColumns="*"
+            android:background="@color/header_background"
+            android:layout_gravity="fill_horizontal"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/markerView2"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/darkblue"
+            android:background="@color/white"
+            android:layout_margin="0sp"
+            android:textSize="14sp"
+            android:layout_gravity="fill_horizontal"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/markerView3"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/darkblue"
+            android:background="@color/white"
+            android:layout_margin="0sp"
+            android:textSize="14sp"
+            android:layout_gravity="fill_horizontal"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/markerView4"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/darkblue"
+            android:background="@color/white"
+            android:layout_margin="0sp"
+            android:textSize="14sp"
+            android:layout_gravity="fill_horizontal"/>
+    </TableRow>
+
+    </TableLayout>

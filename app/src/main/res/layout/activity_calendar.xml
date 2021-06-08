@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="?android:attr/actionBarSize"
+    android:id= "@+id/calendartablelayout"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:stretchColumns="*"
+    android:layout_centerInParent="true"
+    tools:context="org.mkonchady.mytripoo.activities.CalendarActivity">
+
+    <TableRow
+        android:id="@+id/tableRow0"
+        android:layout_height="75dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        tools:ignore="uselessParent">
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/playfDownButton"
+            android:src="@drawable/playf_down"
+            android:background="@color/white"
+            android:padding="4dp"
+            android:scaleType="centerInside"
+            android:onClick="downArrow"
+            android:layout_weight="0.14"
+            />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/playrSlowButton"
+            android:src="@drawable/playr_slow"
+            android:background="@color/white"
+            android:scaleType="centerInside"
+            android:padding="4dp"
+            android:onClick="leftArrow"
+            android:layout_weight="0.14"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendarTitle"
+            android:text="@string/calendar_date"
+            android:padding="4dp"
+            android:textSize="20sp"
+            android:textColor="@color/darkpurple"
+            android:background="@color/White"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:layout_weight="0.44"
+            />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/playfSlowButton"
+            android:src="@drawable/playf_slow"
+            android:background="@color/white"
+            android:scaleType="centerInside"
+            android:padding="4dp"
+            android:onClick="rightArrow"
+            android:layout_weight="0.14"
+            />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/playfFastButton"
+            android:src="@drawable/playf_up"
+            android:background="@color/white"
+            android:scaleType="centerInside"
+            android:padding="4dp"
+            android:onClick="upArrow"
+            android:layout_weight="0.14"
+            />
+    </TableRow>
+
+</TableLayout>

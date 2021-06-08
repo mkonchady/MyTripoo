@@ -1,0 +1,63 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/action_map_play"
+        android:title="@string/action_map_play"
+        android:icon="@drawable/playf_slow"
+        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
+        tools:ignore="AppCompatResource">
+    </item>
+
+    <item
+        android:id="@+id/action_map_pause"
+        android:title="@string/action_map_pause"
+        android:icon="@drawable/pause"
+        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
+        tools:ignore="AppCompatResource">
+    </item>
+
+    <item
+        android:id="@+id/action_map_reverse"
+        android:title="@string/action_map_reverse"
+        android:icon="@drawable/playr_slow"
+        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
+        tools:ignore="AppCompatResource">
+    </item>
+
+    <item android:id="@+id/action_speed_map"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_speed_map"/>
+    <item android:id="@+id/action_elevation_map"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_elevation_map"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_tracks_map"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_tracks_map"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_tracks_winds"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_winds_map"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_gradient_map"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_gradient_map"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_bearing_map"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_bearing_map"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_satinfo_map"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_satinfo_map"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_power_map"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/action_power_map"
+        app:showAsAction="ifRoom" />
+</menu>

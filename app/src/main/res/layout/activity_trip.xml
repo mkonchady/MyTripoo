@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="?android:attr/actionBarSize"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id= "@+id/triptableHeader"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:id="@+id/tableRow0"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            tools:ignore="uselessParent">
+
+            <TextView
+                android:id="@+id/statusTrip"
+                android:text=""
+                android:layout_weight="1.00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/PapayaWhip"
+                android:background="@color/MidnightBlue"
+                android:textSize="16sp"
+                android:gravity="center_horizontal"/>
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            tools:ignore="uselessParent">
+
+            <TextView android:id="@+id/startView"
+                android:layout_width="0dip"
+                android:layout_weight="0.15"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/start"/>
+
+            <EditText android:id="@+id/start_date"
+                android:layout_width="0dip"
+                android:layout_weight="0.35"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:hint="@string/date_message"
+                android:inputType="date"/>
+
+            <TextView android:id="@+id/endView"
+                android:layout_width="0dip"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/end" />
+
+            <EditText android:id="@+id/end_date"
+                android:layout_width="0dip"
+                android:layout_weight="0.4"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_height="wrap_content"
+                android:hint="@string/date_message"
+                android:inputType="date"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="@color/header_background"
+            tools:ignore="uselessParent">
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/header_foreground"
+                android:onClick="idOrder"
+                android:gravity="start"
+                android:text="@string/trip_id"
+                />
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_weight="0.27"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/header_foreground"
+                android:onClick="dateOrder"
+                android:gravity="start"
+                android:text="@string/trip_date"
+                />
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_weight="0.18"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/header_foreground"
+                android:gravity="end"
+                android:text="@string/trip_duration"
+                />
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_weight="0.15"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/header_foreground"
+                android:gravity="end"
+                android:text="@string/trip_distance"
+                />
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_weight="0.15"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/header_foreground"
+                android:gravity="end"
+                android:text="@string/trip_speed"
+                />
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_weight="0.15"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/header_foreground"
+                android:gravity="end"
+                android:text="@string/trip_category"
+                />
+
+        </TableRow>
+
+       </TableLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/triptableHeader">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/triptablelayout"
+            android:stretchColumns="*">
+        </TableLayout>
+    </ScrollView>
+
+</RelativeLayout>

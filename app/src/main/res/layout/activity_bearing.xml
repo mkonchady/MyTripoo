@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".activities.TripMapActivity"
+    android:paddingTop="?android:attr/actionBarSize"
+    android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/statusView2"
+            android:text="@string/bearing"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/PapayaWhip"
+            android:background="@color/MidnightBlue"
+            android:textSize="16sp"
+            android:gravity="center_horizontal"/>
+
+        <org.mkonchady.mytripoo.views.BearingView
+            android:id="@+id/bearingView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+</LinearLayout>

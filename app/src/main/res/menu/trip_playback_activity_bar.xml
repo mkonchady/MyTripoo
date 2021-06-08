@@ -1,0 +1,66 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/action_map_play"
+        android:title="@string/action_map_play"
+        android:icon="@drawable/playf_slow"
+        android:showAsAction="always"
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource">
+    </item>
+
+    <item
+        android:id="@+id/action_map_pause"
+        android:title="@string/action_map_pause"
+        android:icon="@drawable/pause"
+        android:showAsAction="always"
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource">
+    </item>
+
+    <item
+        android:id="@+id/action_map_reverse"
+        android:title="@string/action_map_reverse"
+        android:icon="@drawable/playr_slow"
+        android:showAsAction="always"
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource">
+    </item>
+
+
+    <item
+        android:id="@+id/action_delay_1"
+        android:title="@string/action_delay_1"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/action_delay_10"
+        android:title="@string/action_delay_10"
+        app:showAsAction="never">
+    </item>
+
+    <item
+        android:id="@+id/action_delay_30"
+        android:title="@string/action_delay_30"
+        app:showAsAction="never">
+    </item>
+
+    <item android:id="@+id/action_delay_60"
+        android:title="@string/action_delay_60"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_delay_300"
+        android:title="@string/action_delay_300"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_delay_600"
+        android:title="@string/action_delay_600"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_delay_3600"
+        android:title="@string/action_delay_3600"
+        app:showAsAction="never"/>
+
+</menu>

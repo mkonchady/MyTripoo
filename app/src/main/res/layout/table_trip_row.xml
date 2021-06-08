@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/row_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/summary">
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_weight="0.1"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/summaryID"
+        />
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_weight="0.27"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/summaryDate"
+        />
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_weight="0.18"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:gravity="end"
+        android:id="@+id/summaryDuration"
+        />
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_weight="0.15"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:gravity="end"
+        android:id="@+id/summaryDistance"
+        />
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_weight="0.15"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:gravity="end"
+        android:id="@+id/summarySpeed"
+        />
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_weight="0.15"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:onClick="fixCategory"
+        android:gravity="end"
+        android:id="@+id/summaryCategory"
+        />
+
+</TableRow>

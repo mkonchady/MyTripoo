@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="?android:attr/actionBarSize"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_gravity="top|center"
+        android:background="@color/Wheat"
+        android:paddingBottom="2dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/timeTextView"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:gravity="center_horizontal"
+            android:background="@color/Wheat"
+            android:layout_weight="0.2" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/timeDistanceView1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/darkpurple"
+            android:gravity="end"
+            android:background="@color/Wheat"
+            android:layout_weight="0.2" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/timeDistanceView2"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/darkblue"
+            android:background="@color/Wheat"
+            android:gravity="end"
+            android:layout_weight="0.2" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/timeDistanceView3"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/darkpurple"
+            android:background="@color/Wheat"
+            android:gravity="end"
+            android:layout_weight="0.2" />
+
+    </LinearLayout>
+
+    <org.mkonchady.mytripoo.views.TripCompareView
+        android:id="@+id/tripCompareView"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_height="464dp"
+        android:layout_width="match_parent"
+        android:background="@color/White"
+         />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_gravity="bottom|center"
+        android:paddingTop="0dp"
+        android:layout_height="60dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playrFastButton"
+            android:src="@drawable/playr_fast"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:onClick="rreverseCompare"
+            android:layout_weight="0.20" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playrSlowButton"
+            android:src="@drawable/playr_slow"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:padding="5dp"
+            android:onClick="reverseCompare"
+            android:layout_weight="0.20" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pause"
+            android:src="@drawable/pause"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:padding="5dp"
+            android:onClick="pauseCompare"
+            android:layout_weight="0.20" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playfSlowButton"
+            android:src="@drawable/playf_slow"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:padding="5dp"
+            android:onClick="forwardCompare"
+            android:layout_weight="0.20" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playfFastButton"
+            android:src="@drawable/playf_fast"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:padding="5dp"
+            android:onClick="fforwardCompare"
+            android:layout_weight="0.20" />
+    </LinearLayout>
+</FrameLayout>

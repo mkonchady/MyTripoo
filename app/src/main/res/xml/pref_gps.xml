@@ -1,0 +1,37 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="gps"
+        android:entries="@array/pref_locationProviderArray"
+        android:entryValues="@array/pref_locationProviderValues"
+        android:key="Location_provider"
+        android:title="@string/pref_gps_provider" />
+    <ListPreference
+        android:defaultValue="medium"
+        android:entries="@array/pref_locationAccuracyArray"
+        android:entryValues="@array/pref_locationAccuracyValues"
+        android:key="Location_accuracy"
+        android:title="@string/pref_gps_accuracy" />
+    <ListPreference
+        android:defaultValue="low"
+        android:entries="@array/pref_locationpollIntervalArray"
+        android:entryValues="@array/pref_locationpollIntervalValues"
+        android:key="Poll_interval"
+        android:title="@string/pref_gps_poll_interval" />
+    <ListPreference
+        android:defaultValue="gpx"
+        android:entries="@array/pref_fileFormatArray"
+        android:entryValues="@array/pref_fileFormatValues"
+        android:key="File_format"
+        android:title="@string/pref_file_format" />
+    <EditTextPreference
+        android:defaultValue="AIzaSyB6RBvMqDCTTrVKdDqLumwNtTi2Z6"
+        android:key="google_api_key"
+        android:title="Google API Key" />
+    <EditTextPreference
+        android:defaultValue="c5d14b4cafe6af9c3e1606b744f7"
+        android:key="openweather_api_key"
+        android:title="Openweather API Key" />
+
+
+</PreferenceScreen>

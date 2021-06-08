@@ -1,0 +1,52 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:defaultValue="5"
+        android:entries="@array/pref_walkingSpeedArray"
+        android:entryValues="@array/pref_walkingSpeedValues"
+        android:key="Walking_speed"
+        android:title="@string/pref_avg_walking_speed" />
+    <ListPreference
+        android:defaultValue="2"
+        android:entries="@array/pref_DebugArray"
+        android:entryValues="@array/pref_DebugValues"
+        android:key="Debug_mode"
+        android:title="@string/pref_debug_mode" />
+    <ListPreference
+        android:defaultValue="long"
+        android:entries="@array/pref_tripTypeArray"
+        android:entryValues="@array/pref_tripTypeValues"
+        android:key="Trip_type"
+        android:title="@string/pref_trip_type" />
+    <ListPreference
+        android:defaultValue="no"
+        android:entries="@array/pref_plotSpeedArray"
+        android:entryValues="@array/pref_plotSpeedValues"
+        android:key="Plot_speed"
+        android:title="@string/pref_plot_speed" />
+    <ListPreference
+        android:defaultValue="40"
+        android:entries="@array/pref_numTripsArray"
+        android:entryValues="@array/pref_numTripsValues"
+        android:key="Number_of_trip_rows"
+        android:title="@string/pref_num_trips" />
+    <ListPreference
+        android:defaultValue="2000"
+        android:entries="@array/pref_numReadingsArray"
+        android:entryValues="@array/pref_numReadingsValues"
+        android:key="Number_of_trip_readings"
+        android:title="@string/pref_num_readings" />
+    <ListPreference
+        android:defaultValue="600"
+        android:entries="@array/pref_beep_period_array"
+        android:entryValues="@array/pref_beep_period_values"
+        android:key="Beep_period"
+        android:title="@string/pref_beep_period" />
+    <ListPreference
+        android:defaultValue="No"
+        android:entries="@array/pref_autostopArray"
+        android:entryValues="@array/pref_autostopValues"
+        android:key="autostop"
+        android:title="@string/pref_autostop" />
+
+</PreferenceScreen>
+

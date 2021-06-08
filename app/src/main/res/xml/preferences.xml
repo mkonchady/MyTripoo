@@ -1,0 +1,103 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Defaults for General prefs -->
+    <ListPreference android:title="Average Walking Speed"
+        android:summary="Choose the average walking speed"
+        android:key="Walking_speed"
+        android:defaultValue="5"
+        android:entries="@array/walkingSpeedArray"
+        android:entryValues="@array/walkingSpeedValues" />
+
+    <ListPreference android:title="Debug Mode"
+        android:summary="Optionally create a Log file"
+        android:key="Debug_mode"
+        android:defaultValue="0"
+        android:entries="@array/DebugArray"
+        android:entryValues="@array/DebugValues" />
+
+    <ListPreference android:title="Trip Duration"
+        android:summary="Choose the duration of trip"
+        android:key="Trip_type"
+        android:defaultValue="medium"
+        android:entries="@array/tripTypeArray"
+        android:entryValues="@array/tripTypeValues" />
+
+    <ListPreference android:title="Map Plot Speed"
+        android:summary="Choose the plot speed"
+        android:key="Plot_speed"
+        android:defaultValue="no"
+        android:entries="@array/plotSpeedArray"
+        android:entryValues="@array/plotSpeedValues" />
+
+    <ListPreference android:title="Trip Rows"
+        android:summary="Choose the max. number of rows per screen"
+        android:key="Number_of_rows_window"
+        android:defaultValue="medium"
+        android:entries="@array/pref_numTripsArray"
+        android:entryValues="@array/pref_numTripsValues" />
+
+    <ListPreference android:title="Trip Readings"
+        android:summary="Choose the max. number of readings per trip"
+        android:key="Number_of_readings_trip"
+        android:defaultValue="medium"
+        android:entries="@array/pref_numReadingsArray"
+        android:entryValues="@array/pref_numReadingsValues" />
+
+    <ListPreference android:title="Beep Period"
+        android:summary="Set the period to beep elapsed time"
+        android:key="Beep_period"
+        android:defaultValue="-1"
+        android:entries="@array/pref_beep_period_array"
+        android:entryValues="@array/pref_beep_period_values" />
+
+    <!-- Defaults for Location prefs -->
+    <ListPreference android:id="@+id/battery_usage"
+        android:title="Location Provider"
+        android:summary="Choose GPS+network for minimal battery usage"
+        android:key="Location_provider"
+        android:defaultValue="gps"
+        android:entries="@array/locationProviderArray"
+        android:entryValues="@array/locationProviderValues" />
+
+    <ListPreference android:title="Distance between Location Readings"
+        android:summary="Select low for precise readings"
+        android:key="Location_accuracy"
+        android:defaultValue="low"
+        android:entries="@array/locationAccuracyArray"
+        android:entryValues="@array/locationAccuracyValues" />
+
+    <ListPreference android:title="Time between Location Readings"
+        android:summary="Choose low for high precision"
+        android:key="Poll_interval"
+        android:defaultValue="low"
+        android:entries="@array/pollIntervalArray"
+        android:entryValues="@array/pollIntervalValues" />
+
+    <ListPreference android:title="Export File Format"
+        android:summary="Select the output data file format"
+        android:key="File_format"
+        android:defaultValue="gpx"
+        android:entries="@array/fileFormatArray"
+        android:entryValues="@array/fileFormatValues" />
+
+    <!-- Defaults for SMS prefs -->
+    <ListPreference android:title="Send SMS"
+        android:summary="Choose Yes to periodically send SMSes"
+        android:key="Send_sms"
+        android:defaultValue="no"
+        android:entries="@array/SMSArray"
+        android:entryValues="@array/SMSValues" />
+
+    <EditTextPreference android:title="SMS Number"
+        android:id="@+id/sms_number"
+        android:summary="Enter the SMS phone number"
+        android:key="Sms_number"
+        android:defaultValue="0"/>
+
+    <ListPreference android:title="SMS Frequency"
+        android:summary="Set the number of minutes before sending SMS"
+        android:key="Sms_period"
+        android:defaultValue="0"
+        android:entries="@array/smsPeriodArray"
+        android:entryValues="@array/smsPeriodValues" />
+</PreferenceScreen>

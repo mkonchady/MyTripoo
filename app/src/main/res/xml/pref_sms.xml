@@ -1,0 +1,26 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
+         dismiss it. -->
+    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+    <ListPreference
+        android:defaultValue="no"
+        android:entries="@array/pref_sms_yn"
+        android:entryValues="@array/pref_sms_yn_values"
+        android:key="Send_sms"
+        android:title="@string/pref_sms_yn" />
+    <ListPreference
+        android:defaultValue="180"
+        android:entries="@array/pref_sms_frequency_array"
+        android:entryValues="@array/pref_sms_frequency_values"
+        android:key="Sms_period"
+        android:title="@string/pref_sms_frequency" />
+    <EditTextPreference
+        android:defaultValue="123456789"
+        android:key="Sms_number"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_sms_number" />
+
+</PreferenceScreen>

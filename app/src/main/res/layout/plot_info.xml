@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id= "@+id/plotTableLayout"
+    android:layout_width= "wrap_content"
+    android:layout_height= "wrap_content"
+    android:layout_margin="0dp"
+    android:background="#80000000"
+    android:stretchColumns="*">
+
+
+    <TableRow
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/plotTextView0a"
+            android:text="@string/legend"
+            android:layout_weight="1"
+            android:layout_span="1"
+            android:textColor="@color/PapayaWhip"
+            android:background="@color/MidnightBlue"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:padding="5dip" android:gravity="center"/>
+
+    </TableRow>
+
+
+    <TableRow
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/plotTextView00a"
+            android:text="@string/num_readings"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:textColor="@color/Black"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:padding="5dip" android:gravity="start"/>
+        <TextView
+            android:id="@+id/plotTextView00b"
+            android:text=""
+            android:layout_weight="0.5"
+            android:background="#FFFFFF"
+            android:textColor="@color/Black"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:padding="5dip" android:gravity="start"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/plotTextView01a"
+            android:text=""
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:textColor="@color/LightBlue"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:padding="5dip" android:gravity="start"/>
+        <TextView
+            android:id="@+id/plotTextView01b"
+            android:text=""
+            android:layout_weight="0.5"
+            android:background="#FFFFFF"
+            android:textColor="@color/LightBlue"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:padding="5dip" android:gravity="start"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/plotTextView02a"
+            android:text=""
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:textColor="@color/DarkBlue"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:padding="5dip" android:gravity="start"/>
+        <TextView
+            android:id="@+id/plotTextView02b"
+            android:text=""
+            android:layout_weight="0.5"
+            android:background="#FFFFFF"
+            android:textColor="@color/DarkBlue"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:padding="5dip" android:gravity="start"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/plotTextView03a"
+            android:text=""
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:textColor="@color/IndianRed"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:padding="5dip" android:gravity="start"/>
+        <TextView
+            android:id="@+id/plotTextView03b"
+            android:text=""
+            android:layout_weight="0.5"
+            android:background="#FFFFFF"
+            android:textColor="@color/IndianRed"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:padding="5dip" android:gravity="start"/>
+
+    </TableRow>
+
+</TableLayout>

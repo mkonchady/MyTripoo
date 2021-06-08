@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id= "@+id/satelliteTableLayout"
+    android:layout_width= "wrap_content"
+    android:layout_height= "wrap_content"
+    android:layout_margin="0dp"
+    android:background="#80000000"
+    android:stretchColumns="*">
+
+
+    <TableRow
+        android:background="@color/header_background">
+        <TextView
+            android:id="@+id/satTextView00"
+            android:layout_width="0dip"
+            android:layout_weight="0.1"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/header_foreground"
+            android:text=""
+            android:gravity="center"
+            />
+    </TableRow>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/satTextView01a"
+            android:text=""
+            android:layout_weight="0.5"
+            android:background="#BBDEFB"
+            android:textColor="#000000"
+            android:padding="5dip" android:gravity="center"/>
+        <TextView
+            android:id="@+id/satTextView01b"
+            android:text=""
+            android:layout_weight="1"
+            android:background="#BBDEFB"
+            android:textColor="#000000"
+            android:padding="5dip" android:gravity="center"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/satTextView02a"
+            android:text=""
+            android:layout_weight="0.5"
+            android:background="#E3F2FD"
+            android:textColor="#000000"
+            android:padding="5dip" android:gravity="center"/>
+        <TextView
+            android:id="@+id/satTextView02b"
+            android:text=""
+            android:layout_weight="1"
+            android:background="#E3F2FD"
+            android:textColor="#000000"
+            android:padding="5dip" android:gravity="center"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/satTextView03a"
+            android:text=""
+            android:layout_weight="0.5"
+            android:background="#BBDEFB"
+            android:textColor="#000000"
+            android:padding="5dip" android:gravity="center"/>
+        <TextView
+            android:id="@+id/satTextView03b"
+            android:text=""
+            android:layout_weight="1"
+            android:background="#BBDEFB"
+            android:textColor="#000000"
+            android:padding="5dip" android:gravity="center"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/satTextView04a"
+            android:text=""
+            android:layout_weight="0.5"
+            android:background="#E3F2FD"
+            android:textColor="#000000"
+            android:padding="5dip" android:gravity="center"/>
+        <TextView
+            android:id="@+id/satTextView04b"
+            android:text=""
+            android:layout_weight="1"
+            android:background="#E3F2FD"
+            android:textColor="#000000"
+            android:padding="5dip" android:gravity="center"/>
+    </TableRow>
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/satTextView05a"
+            android:text=""
+            android:layout_weight="0.5"
+            android:background="#BBDEFB"
+            android:textColor="#000000"
+            android:padding="5dip" android:gravity="center"/>
+        <TextView
+            android:id="@+id/satTextView05b"
+            android:text=""
+            android:layout_weight="1"
+            android:background="#BBDEFB"
+            android:textColor="#000000"
+            android:padding="5dip" android:gravity="center"/>
+    </TableRow>
+
+</TableLayout>

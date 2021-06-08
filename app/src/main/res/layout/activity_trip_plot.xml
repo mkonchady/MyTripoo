@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ap="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingTop="?android:attr/actionBarSize"
+    >
+
+    <com.androidplot.xy.XYPlot
+        style="@style/APDefacto.Dark"
+        android:id="@+id/plot"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        ap:title="A Plot"
+        ap:rangeTitle="range"
+        ap:domainTitle="domain"
+        ap:borderColor="#000000"
+        ap:backgroundColor="#FFFFFF"
+        ap:graphBackgroundColor="#FFFFFF"
+        ap:gridBackgroundColor="#FFFFFF"
+        ap:paddingLeft="10dp"
+        ap:paddingRight="5dp"
+        ap:paddingTop="20dp"
+        ap:paddingBottom="20dp"
+        ap:titleTextSize="20sp"
+        ap:titleTextColor="@color/Black"
+        ap:rangeTitleTextSize="15sp"
+        ap:domainTitleTextSize="15sp"
+        ap:graphMarginTop="20dp"
+        ap:graphMarginBottom="40dp"
+        ap:graphMarginLeft="15dp"
+        ap:graphMarginRight="10dp"
+        ap:domainLineColor="@color/Black"
+        ap:domainLineThickness="1dp"
+        ap:rangeLineColor="@color/Black"
+        ap:rangeLineThickness="1dp"
+        ap:legendTextSize="0sp"
+        ap:legendIconHeight="0dp"
+        ap:legendIconWidth="0dp"
+        ap:legendHeight="0dp"
+        ap:legendAnchor="left_bottom"
+
+        />
+</LinearLayout>
+
+<!--
+    ap:rangeTickTextSize="15sp"
+    ap:rangeOriginTickTextSize="15sp"
+    ap:domainTickTextSize="15sp"
+    ap:domainOriginTickTextSize="15sp"
+-->

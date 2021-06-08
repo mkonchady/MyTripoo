@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analyse">Analysis</string>
+    <string name="app_name">GPS Trip Analyzer</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+    <string name="action_calculator">Calculator</string>
+    <string name="action_privacy_policy">Privacy Policy</string>
+    <string name="action_trips">Trips</string>
+    <string name="action_satellites">Satellites</string>
+    <string name="activity_satinfo">Satellite Information</string>
+    <string name="action_sms_location">SMS Location</string>
+    <string name="activity_plotinfo">Plot Information</string>
+    <string name="activity_tripinfo">Trip Information</string>
+    <string name="action_analyse">Analyse Trip</string>
+    <string name="action_altitude">Get Altitudes </string>
+    <string name="action_fix_gps">Fix GPS Location </string>
+    <string name="action_fix_alt">Fix GPS Altitude </string>
+    <string name="action_get_temp">Get Temp+Wind </string>
+    <string name="action_follow">Follow this trip</string>
+    <string name="action_calendar">Calendar</string>
+    <string name="action_copy">Copy trip</string>
+    <string name="action_compare">Compare trips</string>
+    <string name="action_current">Current Trip</string>
+    <string name="action_delay_1">1 second</string>
+    <string name="action_delay_10">10 seconds</string>
+    <string name="action_delay_30">30 seconds</string>
+    <string name="action_delay_60">1 minute</string>
+    <string name="action_delay_300">5 minutes</string>
+    <string name="action_delay_600">10 minutes</string>
+    <string name="action_delay_3600">1 hour</string>
+    <string name="action_delete">Delete Trip(s)</string>
+    <string name="action_edit">Edit Trip</string>
+    <string name="action_export">Export Trip</string>
+    <string name="action_import">Import Trip</string>
+    <string name="action_import_keys">Import API Keys</string>
+    <string name="action_export_keys">Export API Keys</string>
+    <string name="action_split">Split Trip</string>
+    <string name="action_simulate">Simulate Trip</string>
+    <string name="action_speed_map">Map Speed</string>
+    <string name="action_elevation_map">Map Altitude</string>
+    <string name="action_gradient_map">Map Gradient</string>
+    <string name="action_satinfo_map">Map Satinfo</string>
+    <string name="action_power_map">Map Power</string>
+    <string name="action_bearing_map">Map Bearings</string>
+    <string name="action_tracks_map">Map Tracks</string>
+    <string name="action_winds_map">Map Winds</string>
+    <string name="action_waypoints_map">Map Waypoints</string>
+    <string name="action_maps">Trip Maps</string>
+    <string name="action_combine">Combine Trips</string>
+    <string name="action_repair">Repair Trips</string>
+    <string name="action_snap">Snap to Road (from Google)</string>
+    <string name="action_compass">Compass</string>
+    <string name="action_speed_plot">Speed Plot</string>
+    <string name="action_head_wind_plot">Head Wind Plot</string>
+    <string name="action_gradient_plot">Gradient Plot</string>
+    <string name="action_satinfo_plot">Signal Plot</string>
+    <string name="action_satellites_plot">Satellites Plot</string>
+    <string name="action_pace_plot">Pace Plot</string>
+    <string name="action_permission">Permission</string>
+    <string name="action_battery_plot">Battery Plot</string>
+    <string name="action_elevation_plot">Altitude Plot</string>
+    <string name="action_speed_segment_plot">Speed by Segment Plot</string>
+    <string name="action_accuracy_plot">Accuracy Plot</string>
+    <string name="action_reading_time_plot">Reading Time Interval Plot</string>
+    <string name="action_reading_distance_plot">Reading Distance Interval Plot</string>
+    <string name="action_power_plot">Power Plot</string>
+    <string name="action_power_histo_plot">Power Histogram Plot</string>
+    <string name="action_vam_plot">VAM Plot</string>
+    <string name="action_plots">Trip Plots</string>
+    <string name="action_playback">Trip Playback</string>
+    <string name="action_view_satellites">Satellites</string>
+    <string name="action_set_location">Set Location</string>
+    <string name="action_bearing">Trip Bearings</string>
+    <string name="action_map_play">Play</string>
+    <string name="action_map_pause">Pause</string>
+    <string name="action_map_reverse">Reverse</string>
+    <string name="action_map_split">Split Segments</string>
+    <string name="action_show_directions">Show Directions</string>
+    <string name="action_wakeup">Wakeup GPS</string>
+    <string name="bearing">Bearing: 0°</string>
+    <string name="battery_min">Min. Battery</string>
+    <string name="battery_max">Max. Battery</string>
+    <string name="battery_used">Used Battery</string>
+    <string name="calendar">Calendar</string>
+    <string name="calendar_date">January 1970</string>
+    <string name="cancel">Cancel</string>
+    <string name="combine">Combine</string>
+    <string name="compare">Compare</string>
+    <string name="compass_enabled">Compass</string>
+    <string name="category_all">All</string>
+    <string name="category_cycling">Cycling</string>
+    <string name="category_jogging">Jogging</string>
+    <string name="category_walking">Walking</string>
+    <string name="delete">Delete</string>
+    <string name="description">Description</string>
+    <string name="date_message">dd/mm/yy</string>
+    <string name="end">END:</string>
+    <string name="export">Export</string>
+    <string name="enable_gps">Enable GPS</string>
+    <string name="follow">Follow</string>
+    <string name="seven_underscores">_______</string>
+    <string name="finished">finished</string>
+    <string name="getting_coordinates">Locating coordinates </string>
+    <string name="gps_enabled">gps_enabled</string>
+    <string name="imports">Import</string>
+    <string name="legend">Legend</string>
+    <string name="num_readings">No. of Readings</string>
+    <string name="ok">OK</string>
+    <string name="locationService">Trip is in progress </string>
+    <string name="locationServiceLabel">MyTripoo</string>
+    <string name="map">Map</string>
+
+    <string name="monitor_in_progress">Monitoring in progress </string>
+    <string name="monitor_ended">Monitoring is complete </string>
+    <string name="monitor_cleanup">Monitor cleanup in progress</string>
+
+
+    <string name="select_one_trip">Please select only 1 trip</string>
+    <string name="select_two_trip">Please select exactly 2 trips</string>
+    <string name="select_least_two_trip">Please select at least 2 trips</string>
+    <string name="network_enabled">network_enabled</string>
+    <string name="no_coordinates">Did not receive coordinates from GPS in</string>
+
+    <string name="pace_min">Min. Pace</string>
+    <string name="pace_max">Max. Pace</string>
+    <string name="pace_avg">Avg. Pace</string>
+
+    <string name="passive_enabled">passive_enabled</string>
+    <string name="preferences_file">mytripoo.preferences</string>
+    <string name="preferences_about_title">About</string>
+    <string name="preferences_about_description">About MyTripoo Version 0.1</string>
+    <string name="pressure_enabled">Pressure</string>
+    <string name="repair">Repair</string>
+    <string name="running">running</string>
+    <string name="search">Search</string>
+    <string name="start">Start</string>
+    <string name="status">Status: </string>
+    <string name="temperature_enabled">Temperature</string>
+    <string name="trip_in_progress">Trip in progress </string>
+    <string name="trip_ended">Trip is complete </string>
+    <string name="trip_cleanup">Trip cleanup in progress</string>
+    <string name="trip_list">Trip List </string>
+    <string name="google_app_id">mytripoo-1127</string>
+    <string name="sat_prn">Satellite </string>
+    <string name="sat_azi">Azimuth </string>
+    <string name="sat_ele">Elevation </string>
+    <string name="sat_sig">Signal </string>
+    <string name="sat_type">Type </string>
+    <string name="sat_flag">Country</string>
+    <string name="feature">Feature</string>
+    <string name="value">Value</string>
+    <string name="about_title">MyTripoo: Trip Analysis and Monitor</string>
+    <string name="time">Time: </string>
+    <string name="trip_id">ID</string>
+    <string name="trip_date">Date</string>
+    <string name="trip_duration">Duration</string>
+    <string name="trip_distance">Dist.</string>
+    <string name="trip_category">Cat.</string>
+    <string name="trip_speed">Speed</string>
+    <string name="trip_covered_distance">Covered Distance</string>
+    <string name="trip_trip_distance">Trip Distance</string>
+    <string name="trip_remainder">Remainder</string>
+    <string name="trip_percent_covered">Percent Covered</string>
+    <string name="icon_image">Icon image</string>
+    <string name="russia">Russia</string>
+    <string name="china">China</string>
+    <string name="india">China</string>
+    <string name="usa">USA</string>
+    <string name="japan">Japan</string>
+    <string name="europe">Europe</string>
+    <string name="unknown">Unknown</string>
+    <string name="visual">Visual</string>
+    <string name="edit">Edit</string>
+
+    <!-- days of the week -->
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="total">   Tot</string>
+
+
+
+    <!-- General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_avg_walking_speed">Average Walking Speed</string>
+    <string-array name="pref_walkingSpeedArray">
+        <item>4 kmph</item>
+        <item>5 kmph</item>
+        <item>5.5 kmph</item>
+        <item>6 kmph</item>
+        <item>6.5 kmph</item>
+        <item>7 kmph</item>
+    </string-array>
+    <string-array name="pref_walkingSpeedValues">
+        <item>4</item>
+        <item>5</item>
+        <item>5.5</item>
+        <item>6</item>
+        <item>6.5</item>
+        <item>7</item>
+    </string-array>
+
+    <string name="pref_debug_mode">Debug Mode</string>
+    <string-array name="pref_DebugArray">
+        <item>No messages</item>
+        <item>Local File</item>
+        <item>Android Log</item>
+    </string-array>
+    <string-array name="pref_DebugValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
+    <string name="pref_trip_type">Trip Duration</string>
+    <string-array name="pref_tripTypeArray">
+        <item>Short (1 hour or less) </item>
+        <item>Medium (1 to 4 hours)</item>
+        <item>Long (4 to 6 hours)</item>
+        <item>Really long (+ 6 hours)</item>
+    </string-array>
+    <string-array name="pref_tripTypeValues">
+        <item>short</item>
+        <item>medium</item>
+        <item>long</item>
+        <item>really_long</item>
+    </string-array>
+
+    <string name="pref_plot_speed">Plot Accuracy</string>
+    <string-array name="pref_plotSpeedArray">
+        <item>Yes (Slow, accurate)</item>
+        <item>No (Fast, approximate)</item>
+    </string-array>
+    <string-array name="pref_plotSpeedValues">
+        <item>yes</item>
+        <item>no</item>
+    </string-array>
+
+    <string name="pref_num_trips">Max. Number of Trip Rows / Screen</string>
+    <string-array name="pref_numTripsArray">
+        <item>40</item>
+        <item>80</item>
+        <item>160</item>
+        <item>320</item>
+    </string-array>
+    <string-array name="pref_numTripsValues">
+        <item>40</item>
+        <item>80</item>
+        <item>160</item>
+        <item>1000</item>
+    </string-array>
+
+    <string name="pref_num_readings">Max. Number of Readings / Trip</string>
+    <string-array name="pref_numReadingsArray">
+        <item>1000</item>
+        <item>2000</item>
+        <item>5000</item>
+        <item>10000</item>
+    </string-array>
+    <string-array name="pref_numReadingsValues">
+        <item>1000</item>
+        <item>2000</item>
+        <item>5000</item>
+        <item>10000</item>
+    </string-array>
+
+    <string name="pref_beep_period">Beep Period</string>
+    <string-array name="pref_beep_period_array">
+        <item>1 minute</item>
+        <item>3 minutes</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_beep_period_values">
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+        <item>600</item>
+    </string-array>
+
+    <string name="pref_autostop">Min. auto stop distance from start </string>
+    <string-array name="pref_autostopArray">
+        <item>No</item>
+        <item>10m</item>
+        <item>20m</item>
+        <item>30m</item>
+        <item>40m</item>
+        <item>50m</item>
+    </string-array>
+    <string-array name="pref_autostopValues">
+        <item>No</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
+
+    <!-- Settings for SMS -->
+    <string name="pref_header_sms">SMS Settings</string>
+
+    <string name="pref_sms_yn">Send SMS?</string>
+    <string-array name="pref_sms_yn">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="pref_sms_yn_values">
+        <item>yes</item>
+        <item>no</item>
+    </string-array>
+
+    <string name="pref_sms_frequency">SMS frequency</string>
+    <string-array name="pref_sms_frequency_array">
+        <item>5 minutes</item>
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sms_frequency_values">
+        <item>5</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_sms_number">SMS Number</string>
+
+    <!-- Settings for GPS -->
+    <string name="pref_header_gps">Location Settings</string>
+
+    <string name="pref_gps_provider">Location Provider</string>
+    <string-array name="pref_locationProviderArray">
+        <item>GPS</item>
+        <item>GPS+Network</item>
+    </string-array>
+    <string-array name="pref_locationProviderValues">
+        <item>gps</item>
+        <item>gps+network</item>
+    </string-array>
+
+    <string name="pref_gps_accuracy">GPS Accuracy</string>
+    <string-array name="pref_locationAccuracyArray">
+        <item>Low (5m)</item>
+        <item>Medium (10m) </item>
+        <item>High (20m)</item>
+    </string-array>
+    <string-array name="pref_locationAccuracyValues">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+    </string-array>
+
+    <string name="pref_gps_poll_interval">GPS Poll Interval</string>
+    <string-array name="pref_locationpollIntervalArray">
+        <item>Really Low (1s.)</item>
+        <item>Low (5s.)</item>
+        <item>Medium (10s.)</item>
+        <item>High (20s.)</item>
+    </string-array>
+    <string-array name="pref_locationpollIntervalValues">
+        <item>really_low</item>
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+    </string-array>
+
+    <string name="pref_file_format">Export File Format</string>
+    <string-array name="pref_fileFormatArray">
+        <item>CSV</item>
+        <item>GPX</item>
+        <item>XML</item>
+        <item>Strava</item>
+    </string-array>
+    <string-array name="pref_fileFormatValues">
+        <item>csv</item>
+        <item>gpx</item>
+        <item>xml</item>
+        <item>strava</item>
+    </string-array>
+
+
+
+    <!-- Settings for Bike -->
+    <string name="pref_header_bike">Bicycle Settings</string>
+
+    <string name="pref_bike_rider_wt">Rider Weight (kgs.)</string>
+
+    <string name="pref_bike_bike_wt">Bicycle Weight (kgs.)</string>
+
+    <string name="pref_bike_front">Front Area</string>
+    <string-array name="pref_bike_front_array">
+        <item>Bartop (0.445)</item>
+        <item>Bar ends (0.42)</item>
+        <item>Hoods (0.388)</item>
+        <item>Drops (0.3)</item>
+        <item>Aerobar (0.233)</item>
+    </string-array>
+    <string-array name="pref_bike_front_values">
+        <item>0.445</item>
+        <item>0.42</item>
+        <item>0.388</item>
+        <item>0.3</item>
+        <item>0.233</item>
+    </string-array>
+
+    <string name="pref_bike_rolling">Rolling Resistance</string>
+    <string-array name="pref_bike_rolling_array">
+        <item>MTB (0.012)</item>
+        <item>Clincher (0.005)</item>
+        <item>Tubular (0.004)</item>
+        <item>Tubeless (0.003)</item>
+
+    </string-array>
+    <string-array name="pref_bike_rolling_values">
+        <item>0.012</item>
+        <item>0.005</item>
+        <item>0.004</item>
+        <item>0.003</item>
+    </string-array>
+
+    <string name="pref_bike_drag">Coefficient of Drag</string>
+    <string-array name="pref_bike_drag_array">
+        <item>1.15</item>
+        <item>1.00</item>
+        <item>0.95</item>
+        <item>0.88</item>
+
+    </string-array>
+    <string-array name="pref_bike_drag_values">
+        <item>1.15</item>
+        <item>1.00</item>
+        <item>0.95</item>
+        <item>0.88</item>
+    </string-array>
+
+
+    <string name="pref_bike_commit">Commit period</string>
+    <string-array name="pref_bike_commit_array">
+        <item>0.5 hours</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>3 hours</item>
+        <item>4 hours</item>
+        <item>48 hours</item>
+
+    </string-array>
+    <string-array name="pref_bike_commit_values">
+        <item>0.5</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>48</item>
+    </string-array>
+</resources>
