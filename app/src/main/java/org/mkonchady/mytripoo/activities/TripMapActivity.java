@@ -102,7 +102,7 @@ public class TripMapActivity extends Activity implements OnMapReadyCallback {
         // assign factor to the largest key
         colorMap = UtilsMap.buildColorRamp();
         factor = colorMap.size();
-        ZOOM = calcZoom(summary.getDistance());
+        ZOOM = UtilsMap.calcZoom(summary.getDistance());
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         plot_speed = sharedPreferences.getString(Constants.PREF_PLOT_SPEED, "no");
@@ -201,7 +201,8 @@ public class TripMapActivity extends Activity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap map) {
 
         gMap = map;
-        centerMap(map);
+        int[] bounds = detailDB.getBoundaries(context, trip_id);
+        UtilsMap.centerMap(map, bounds, ZOOM, context);
 
         // handle the touch location
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -362,7 +363,10 @@ public class TripMapActivity extends Activity implements OnMapReadyCallback {
     }
 
     private String genSnippet(int[] closestLocation) {
+        String snippet = "";
         DetailProvider.Detail detail = detailDB.getDetail(context, trip_id, closestLocation[0], closestLocation[1], currentSegment);
+        if (detail == null)
+            return snippet;
         LatLng location = new LatLng(closestLocation[0] / Constants.MILLION, closestLocation[1] / Constants.MILLION);
         String speed_string = "Speed: " + UtilsMisc.formatFloat(detail.getSpeed(), 1) + " kmph.";
         //String bearing_string = "Bearing: " + detail.getBearing() + "°";
@@ -378,7 +382,6 @@ public class TripMapActivity extends Activity implements OnMapReadyCallback {
                 " from " + UtilsMap.getDirection(detail.getWindDeg());
 
         // build the snippet depending on the type of map
-        String snippet;
         switch (mapIndex) {
             case Constants.DRAW_ELEVATION:
                 snippet = altitude_string + Constants.DELIMITER + latitude_string + Constants.DELIMITER + longitude_string;
@@ -425,30 +428,6 @@ public class TripMapActivity extends Activity implements OnMapReadyCallback {
             title = "Summary " + currentSegment;
         }
         gMap.addMarker(new MarkerOptions().position(latLng).title(title).snippet(snippet)).showInfoWindow();
-    }
-
-    public void centerMap(GoogleMap map) {
-        int[] bounds = detailDB.getBoundaries(context, trip_id);
-        double north = bounds[0] / Constants.MILLION;
-        double south = bounds[1] / Constants.MILLION;
-        double east = bounds[2] / Constants.MILLION;
-        double west = bounds[3] / Constants.MILLION;
-        LatLng southWest = new LatLng(south, west);
-        LatLng northEast = new LatLng(north, east);
-        LatLngBounds latLngBounds = new LatLngBounds(southWest, northEast);
-        CameraUpdate camera_center = CameraUpdateFactory.newLatLngZoom(latLngBounds.getCenter(), ZOOM);
-
-        CameraUpdate camera_zoom = CameraUpdateFactory.zoomTo(ZOOM);
-        map.moveCamera(camera_center);
-        map.animateCamera(camera_zoom);
-        final int MY_PERMISSIONS_FINE_LOCATION = 10;
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) context,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_FINE_LOCATION);
-        }
-        map.setMyLocationEnabled(true);
-
     }
 
     private class DrawSpeeds extends AsyncTask<Object, Integer, String> {
@@ -924,17 +903,6 @@ public class TripMapActivity extends Activity implements OnMapReadyCallback {
         int index = d.intValue();
         if (index == factor) index--;   // keep the index within array bounds
         return colorMap.get(index);
-    }
-
-    // set the zoom lower for longer trip distances
-    private int calcZoom(float distance) {
-        int zoom;
-        if (distance < 10 * 1000.0f) zoom = 15;
-        else if (distance < 25 * 1000.0f) zoom = 13;
-        else if (distance < 50 * 1000.0f) zoom = 11;
-        else if (distance < 100 * 1000.0f) zoom = 9;
-        else zoom = 7;
-        return zoom;
     }
 
     private void incCurrentSegment(boolean positiveIncr) {
