@@ -1,16 +1,20 @@
 package org.mkonchady.mytripoo.views;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
 import android.os.AsyncTask;
-//import androidx.core.content.ContextCompat;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.core.content.ContextCompat;
+
+import com.google.android.gms.maps.model.LatLng;
+
+import org.mkonchady.mytripoo.Constants;
+import org.mkonchady.mytripoo.Log;
 import org.mkonchady.mytripoo.R;
 import org.mkonchady.mytripoo.activities.TripCompareActivity;
 import org.mkonchady.mytripoo.database.DetailDB;
@@ -23,39 +27,36 @@ import org.mkonchady.mytripoo.utils.UtilsMisc;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.TreeMap;
 
-// compare two trips side by side
+/**
+ * View to compare two trips
+ */
 public class TripCompareView extends View {
 
-    // canvas parameters
-    private RectF rectF1, rectF2;
-    public int width;
-    public int height;
-    private final int PADDING = 8;
+    // distance parameters
+    public float upDistance = 0.0f;
+    public float downDistance = 0.0f;
+
+    // trip details and hash of timestamp with location
+    public int trip1;
+    public LatLng firstLocation1, lastLocation1;
+    public int trip2;
+    public LatLng firstLocation2, lastLocation2;
+
+    public final TreeMap<Long, LocationDistance> upTrip = new TreeMap<>(new LongComparator());
+    public final TreeMap<Long, LocationDistance> downTrip = new TreeMap<>(new LongComparator());
+    public boolean upIncomplete, downIncomplete;
+    private final int greenColor;
+    private final int redColor;
 
     // time parameters
     private long currentTime = 0L;
     private Timer timer = null;
-
-    // distance parameters
-    private float upDistance = 0.0f;
-    private float downDistance = 0.0f;
-
-    // trip details and hash of timestamp with location
-    private final int trip1;
-    private final int trip2;
-    private TripInfo tripInfo1, tripInfo2;
-    private final TreeMap<Long, TimeLocation> upTrip = new TreeMap<>(new LongComparator());
-    private final TreeMap<Long, TimeLocation> downTrip = new TreeMap<>(new LongComparator());
-    private boolean upIncomplete, downIncomplete;
-
-    private int timeIncr = 1;
-    private final int MIN_TIME_INCR;
-    private final int MAX_TIME_INCR;
+    private int TIME_INCR = 1;
+    private int MIN_TIME_INCR = 1;
     private final long MAX_DURATION;
 
     // Trip Play Buttons
@@ -66,64 +67,44 @@ public class TripCompareView extends View {
     private final int FFORWARD = 2;
     int PREV_BUTTON;
 
-    // db parameters
-    DetailDB detailDB;
-    SummaryDB summaryDB;
-
-    private final Paint paintUp;
-    private final Paint paintDown;
-    private final Paint blackPaint;
-    private final Paint whitePaint;
-
-    Context context;
     private TripCompareActivity tripCompareActivity = null;
-    //private String TAG = "TripCompareView";
+    private MapsFragment1 maps1 = null;
+    private MapsFragment2 maps2 = null;
 
-    public TripCompareView(Context c, AttributeSet attrs) {
-        super(c, attrs);
-        context = c;
+    // db parameters
+    public DetailDB detailDB;
+    public SummaryDB summaryDB;
+    private String TAG = "Compare";
+
+    public TripCompareView(Context context, AttributeSet attrs) {
+        super(context, attrs);
         tripCompareActivity = (TripCompareActivity) context;
-
-        detailDB = new DetailDB(DetailProvider.db);
-
-        // Set the paint for the top trip
-        paintUp = new Paint(); paintUp.setAntiAlias(true);
-        paintUp.setStyle(Paint.Style.STROKE); paintUp.setStrokeJoin(Paint.Join.ROUND);
-        paintUp.setStrokeWidth(8f); paintUp.setColor(Color.GREEN);
-
-        // Set the paint for the lower trip
-        paintDown = new Paint(); paintDown.setAntiAlias(true);
-        paintDown.setStyle(Paint.Style.STROKE); paintDown.setStrokeJoin(Paint.Join.ROUND);
-        paintDown.setStrokeWidth(8f); paintDown.setColor(Color.RED);
-
-        // Set the black paint
-        blackPaint = new Paint(); blackPaint.setAntiAlias(true); blackPaint.setColor(Color.BLACK);
-        blackPaint.setStyle(Paint.Style.STROKE); blackPaint.setStrokeJoin(Paint.Join.ROUND);
-        blackPaint.setStrokeWidth(4f);
-
-        // Set the white paint
-        whitePaint = new Paint(); whitePaint.setAntiAlias(true); whitePaint.setColor(Color.WHITE);
-        whitePaint.setStyle(Paint.Style.FILL); whitePaint.setStrokeJoin(Paint.Join.ROUND);
-        whitePaint.setStrokeWidth(8f);
-
+        tripCompareActivity.setTripCompareView(this);
         trip1 = tripCompareActivity.getTrip_id1();
         trip2 = tripCompareActivity.getTrip_id2();
 
-        // get the summary parameters
+        // get the db parameters
+        detailDB = new DetailDB(DetailProvider.db);
         summaryDB = new SummaryDB(SummaryProvider.db);
         SummaryProvider.Summary summary1 = summaryDB.getSummary(context, trip1);
         long duration1 = summary1.getEnd_time() - summary1.getStart_time();
-
-        summaryDB = new SummaryDB(SummaryProvider.db);
         SummaryProvider.Summary summary2 = summaryDB.getSummary(context, trip2);
         long duration2 = summary2.getEnd_time() - summary2.getStart_time();
         MAX_DURATION = (duration1 < duration2)? duration1: duration2;
+        MIN_TIME_INCR = (MAX_DURATION > 10 * Constants.MILLISECONDS_PER_HOUR)? 30:    // > 10 hours
+                (MAX_DURATION > Constants.MILLISECONDS_PER_HOUR)? 10:1;       // 1-10 hours
 
-        if (MAX_DURATION < 1000 * 3600)          MIN_TIME_INCR = 1;
-        else if (MAX_DURATION < 4 * 1000 * 3600) MIN_TIME_INCR = 2;
-        else if (MAX_DURATION < 6 * 1000 * 3600) MIN_TIME_INCR = 4;
-        else MIN_TIME_INCR = 8;
+        // set the time increment
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        TIME_INCR = 30;  // default of 30 seconds
+        greenColor = ContextCompat.getColor(tripCompareActivity, R.color.darkgreen);
+        redColor = ContextCompat.getColor(tripCompareActivity, R.color.darkred);
+        /*
+        MIN_TIME_INCR = 15;
+        if (MAX_DURATION < 4 * 1000 * 3600) MIN_TIME_INCR = 30;
+        else if (MAX_DURATION < 6 * 1000 * 3600) MIN_TIME_INCR = 60;
         MAX_TIME_INCR = 32 * MIN_TIME_INCR;
+         */
 
         // build the time and location / distance hashes for both trips
         upIncomplete = true;
@@ -135,238 +116,109 @@ public class TripCompareView extends View {
 
         currentTime = 0;
         PREV_BUTTON = FORWARD;
-        startTimer(MIN_TIME_INCR * 4);
+        startTimer(TIME_INCR);
 
     }
-
     // Set the trip parameters before drawing on the canvas
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        final int HEIGHT = 464;
-
         super.onSizeChanged(w, h, oldw, oldh);
-        width = w; height = h;
-        final int PIXEL_PADDING = dpToPx(PADDING);
-
-        // get the x, y coordinates for the top frame
-        final int x1_left = PIXEL_PADDING; final int y1_top = PIXEL_PADDING;
-        final int x1_right = width - PIXEL_PADDING; final int y1_bottom = y1_top + dpToPx(HEIGHT / 2) - PIXEL_PADDING * 4;
-        rectF1 = new RectF(x1_left, y1_top, x1_right, y1_bottom);
-
-        // get the x, y coordinates for the bottom frame
-        final int x2_left = x1_left; final int y2_top = y1_bottom + PIXEL_PADDING;
-        final int x2_right = x1_right; final int y2_bottom = y2_top + dpToPx(HEIGHT / 2) - PIXEL_PADDING * 4;
-        rectF2 = new RectF(x2_left, y2_top, x2_right, y2_bottom);
-
-        // create a trip for the top
-        tripInfo1 = new TripInfo(detailDB.getBoundaries(context, trip1));
-        int[] boundaries1 = {x1_left, x1_right, y1_top, y1_bottom};
-        tripInfo1.setCoordinates(boundaries1);
-
-        // create a trip for the bottom
-        tripInfo2 = new TripInfo(detailDB.getBoundaries(context, trip2));
-        int[] boundaries2 = {x2_left, x2_right, y2_top, y2_bottom};
-        tripInfo2.setCoordinates(boundaries2);
+        maps1 = tripCompareActivity.getMap1();
+        maps2 = tripCompareActivity.getMap2();
     }
 
-    //
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        updateTimer();
+        //Log.d(TAG, "Start onDraw: " + UtilsDate.getDateTimeDeciSec(System.currentTimeMillis(), 13023364, 77577801));
 
         // set the current time and distance
         tripCompareActivity.setTime(UtilsDate.getTimeDurationHHMMSS(currentTime * 1000L, false));
-        tripCompareActivity.setDistance1(trip1 + ": " + UtilsMisc.formatFloat(upDistance, 1) + "km.");
-        tripCompareActivity.setDistance2(trip2 + ": " + UtilsMisc.formatFloat(downDistance, 1) + "km.");
-        tripCompareActivity.setDistance3("Diff : " + UtilsMisc.formatFloat(upDistance - downDistance, 2) + "km.");
-
-        // draw the frames for the two trips
-        canvas.drawRoundRect(rectF1, dpToPx(PADDING), dpToPx(PADDING), blackPaint);
-        canvas.drawRoundRect(rectF2, dpToPx(PADDING), dpToPx(PADDING), blackPaint);
-
-        // update the routes
-        createPath(canvas, true);
-        createPath(canvas, false);
+        tripCompareActivity.setDistance1(trip1 + ": " + UtilsMisc.formatFloat(upDistance, 2) + "km.");
+        tripCompareActivity.setDistance2(trip2 + ": " + UtilsMisc.formatFloat(downDistance, 2) + "km.");
+        tripCompareActivity.setDistance3("Diff : " +
+                UtilsMisc.formatFloat(Math.abs(upDistance - downDistance), 2) + "km.");
+        if (upDistance > downDistance)
+            tripCompareActivity.setDistance3Color(redColor);
+        else
+            tripCompareActivity.setDistance3Color(greenColor);
 
         // simulate a stop button press, when the max. time is reached
+        updateCurrentTime();
         if (currentTime * 1000L >= MAX_DURATION) stopTimer();
-    }
-
-    // increment the current time within time bounds
-    public void updateTimer() {
-        currentTime += timeIncr;
-        if (currentTime < 0) {
-            currentTime = 0;
-            timeIncr = 1;
-            PREV_BUTTON = STOP;
-        } else if (currentTime * 1000L > MAX_DURATION) {
-            currentTime = MAX_DURATION / 1000;
-        }
-    }
-
-    // create the path for the upper trip
-    private void  createPath(Canvas canvas, boolean upper) {
-        if (upper && upIncomplete) return;
-        if (!upper && downIncomplete) return;
-
-        long firstTime = 0; long lastTime = 0;
-        float prev_x = 0; float prev_y = 0;
-        Set<Long> keySet = upper? upTrip.keySet(): downTrip.keySet();
-        for(Long timeKey: keySet) {
-            // get the x, y location
-            TimeLocation tm = upper ? upTrip.get(timeKey): downTrip.get(timeKey);
-            UtilsMisc.XYPoint point = upper? tripInfo1.getXY(tm): tripInfo2.getXY(tm);
-            if (upper) upDistance = tm.getDistance() / 1000.0f;
-            else downDistance = tm.getDistance() / 1000.0f;
-            float curr_x = (float) point.getX();
-            float curr_y = (float) point.getY();
-
-            if (firstTime == 0) firstTime = timeKey;
-            else canvas.drawLine(prev_x, prev_y, curr_x, curr_y, upper? paintUp: paintDown);
-            lastTime = timeKey;
-            if ((timeKey - firstTime) > (currentTime * 1000L) ) {
-                break;
-            }
-            prev_x = (float) point.getX();
-            prev_y = (float) point.getY();
-        }
-
-        // lookahead and blank out any old tracks for 8x seconds
-        long runTime = lastTime;
-        long endTime = lastTime + 8 * MIN_TIME_INCR * 1000;
-        float last_x; float last_y;
-        while (runTime <= endTime) {
-            runTime += 1000L;
-            boolean containsKey = upper? upTrip.containsKey(runTime): downTrip.containsKey(runTime);
-            if (containsKey) {
-                TimeLocation tm = upper ? upTrip.get(runTime): downTrip.get(runTime);
-                UtilsMisc.XYPoint point = upper? tripInfo1.getXY(tm): tripInfo2.getXY(tm);
-                last_x = (float) point.getX();
-                last_y = (float) point.getY();
-                canvas.drawLine(prev_x, prev_y, last_x, last_y, whitePaint);
-                prev_x = last_x;
-                prev_y = last_y;
-            }
-        }
+        //Log.d(TAG, "End onDraw: " + UtilsDate.getDateTimeDeciSec(System.currentTimeMillis(), 13023364, 77577801));
     }
 
     // called from the stop button
     public void stopTimer() {
         if(timer != null) {
-            timer.cancel();
-            timer = null;
-            timeIncr = 1;
+            timer.cancel(); timer = null; TIME_INCR = 1;
         }
         PREV_BUTTON = STOP;
     }
 
+    // increment the current time within time bounds
+    public void updateCurrentTime() {
+        currentTime += TIME_INCR;
+        if (currentTime < 0) {
+            currentTime = 0;
+        } else if (currentTime * 1000L > MAX_DURATION) {
+            currentTime = MAX_DURATION / 1000;
+        }
+    }
+
     // called from the fast forward button
     public void fforwardTimer() {
-        if (PREV_BUTTON == FFORWARD || PREV_BUTTON == FORWARD) setTimeIncr(timeIncr * 4);
-        else timeIncr = MIN_TIME_INCR;
+        if (PREV_BUTTON == FFORWARD || PREV_BUTTON == FORWARD) setTIME_INCR(TIME_INCR * 4);
+        else TIME_INCR = MIN_TIME_INCR;
         PREV_BUTTON = FFORWARD;
         if (timer == null) startTimer(MIN_TIME_INCR);
     }
 
     // called from the forward button
     public void forwardTimer() {
-        if (PREV_BUTTON == FFORWARD || PREV_BUTTON == FORWARD) setTimeIncr(timeIncr * 2);
-        else timeIncr = MIN_TIME_INCR;
+        if (PREV_BUTTON == FFORWARD || PREV_BUTTON == FORWARD) setTIME_INCR(TIME_INCR * 2);
+        else TIME_INCR = MIN_TIME_INCR;
         PREV_BUTTON = FORWARD;
         if (timer == null) startTimer(MIN_TIME_INCR);
     }
 
     // called from the reverse button
     public void reverseTimer() {
-        if (PREV_BUTTON == REVERSE || PREV_BUTTON == RREVERSE) setTimeIncr(timeIncr * 2);
-        else timeIncr = -MIN_TIME_INCR;
+        if (PREV_BUTTON == REVERSE || PREV_BUTTON == RREVERSE) setTIME_INCR(TIME_INCR * 2);
+        else TIME_INCR = -MIN_TIME_INCR;
         PREV_BUTTON = REVERSE;
         if (timer == null) startTimer(-MIN_TIME_INCR);
     }
 
     // called from the fast reverse button
     public void rreverseTimer() {
-        if (PREV_BUTTON == REVERSE || PREV_BUTTON == RREVERSE) setTimeIncr(timeIncr * 4);
-        else timeIncr = -MIN_TIME_INCR;
+        if (PREV_BUTTON == REVERSE || PREV_BUTTON == RREVERSE) setTIME_INCR(TIME_INCR * 4);
+        else TIME_INCR = -MIN_TIME_INCR;
         PREV_BUTTON = RREVERSE;
         if (timer == null) startTimer(-MIN_TIME_INCR);
     }
 
-    public void startTimer(int TIME_INCR) {
-        setTimeIncr(TIME_INCR);
+    public void startTimer(int timeIncr) {
+        setTIME_INCR(timeIncr);
         timer = null;
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                postInvalidate();
+                if (maps1 != null && maps2 != null) { // update the routes
+                    maps1.createPath(currentTime);
+                    maps2.createPath(currentTime);
+                }
             }
         }, 0, 1000L);
-        //Log.d(TAG, "Started timer" + PREF_TIME_INCR);
     }
 
-    public void setTimeIncr(int timeIncr) {
-        int absIncr = Math.abs(timeIncr);
-        if (absIncr <= MAX_TIME_INCR) {
-            this.timeIncr = timeIncr;
-            return;
-        }
-        absIncr /= 2;
-        if (absIncr <= MAX_TIME_INCR)
-            this.timeIncr = timeIncr / 2;
-    }
-
-    public static int dpToPx(int dp) {
-        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
-    }
-
-    /*
-    public static int pxToDp(int px) {
-        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
-    } */
-
-    // save the lat / lon limits of the trip
-    final class TripInfo {
-
-        int min_lat, max_lat, min_lon, max_lon;     // map boundaries of the trip
-        int xleft, xright, ytop, ybottom;           // screen boundaries of the trip
-        float dlat, dlon;                           // pixel scale of the screen
-
-        TripInfo(int[] tripBoundaries) {
-            if (tripBoundaries.length < 4) return;
-            // max, min lat followed by max, min lon
-            max_lat = tripBoundaries[0]; min_lat = tripBoundaries[1];
-            max_lon = tripBoundaries[2]; min_lon = tripBoundaries[3];
-            xleft = xright = ytop = ybottom = 0;
-            dlat = dlon = 0.0f;
-        }
-
-        void setCoordinates(int[] mapBoundaries) {
-            xleft = mapBoundaries[0] + PADDING; xright = mapBoundaries[1] - PADDING;
-            ytop = mapBoundaries[2] + PADDING; ybottom = mapBoundaries[3] - PADDING;
-            // calculate the scale
-            dlon = 1.0f * (xright - xleft) / (max_lon - min_lon);
-            dlat = 1.0f * (ybottom - ytop) / (max_lat - min_lat);
-        }
-
-
-        // given the lat and lon in microdegrees, return the x,y location
-        UtilsMisc.XYPoint getXY(TimeLocation timeLocation) {
-            int lat = timeLocation.getLat(); int lon = timeLocation.getLon();
-            UtilsMisc.XYPoint point = new UtilsMisc.XYPoint(0, 0);
-            // verify that the lat and lon lie within the range
-            if (!(min_lat <= lat && lat <= max_lat))
-                return point;
-            if (!(min_lon <= lon && lon <= max_lon))
-                return point;
-
-            float y = ybottom - (lat - min_lat) * dlat;
-            float x = xleft + (lon - min_lon) * dlon;
-            //float y = ytop + (lat - min_lat) * dlat;
-            //float x = xright - (lon - min_lon) * dlon;
-            point.setXY(x, y);
-            return point;
-        }
+    public void setTIME_INCR(int TIME_INCR) {
+        //if (TIME_INCR >= MIN_TIME_INCR) {
+            this.TIME_INCR = TIME_INCR;
+        //}
+        Log.d(TAG, "Time incr: " + this.TIME_INCR);
     }
 
     // Build the times and locations array lists for the trip
@@ -383,6 +235,20 @@ public class TripCompareView extends View {
             topTrip = (boolean) params[2];
 
             ArrayList<DetailProvider.Detail> details = detailDB.getDetails(context, tripId);
+            DetailProvider.Detail firstDetail = details.get(0);
+            DetailProvider.Detail lastDetail = details.get(details.size()-1);
+            if (topTrip) {
+                firstLocation1 = new LatLng(firstDetail.getLat() / Constants.MILLION,  // set the start and end location for the map
+                        firstDetail.getLon() / Constants.MILLION);
+                lastLocation1 = new LatLng(lastDetail.getLat() / Constants.MILLION,
+                        lastDetail.getLon() / Constants.MILLION);
+            } else {
+                firstLocation2 = new LatLng(firstDetail.getLat() / Constants.MILLION,  // set the start and end location for the map
+                        firstDetail.getLon() / Constants.MILLION);
+                lastLocation2 = new LatLng(lastDetail.getLat() / Constants.MILLION,
+                        lastDetail.getLon() / Constants.MILLION);
+            }
+
             long cumTime = 0;
             int cumDistance = 0;
             for (int i = 1; i < details.size(); i++) {
@@ -402,20 +268,20 @@ public class TripCompareView extends View {
                 // increment time in milliseconds and update the location on second boundaries
                 long currentTime = startTime;
                 while (currentTime < endTime) {
-                  if ((currentTime % 1000) == 0) {
-                       // use the rate of change and time to update the lat / lon / and distance
-                       double currentLat = startLat + (currentTime - startTime) * latRate;
-                       double currentLon = startLon + (currentTime - startTime) * lonRate;
-                       double currentDist = cumDistance + (currentTime - startTime) * distRate;
-                       TimeLocation timeLocation = new TimeLocation(
-                               (int) Math.round(currentLat),
-                               (int) Math.round(currentLon),
-                               (int) Math.round(currentDist) );
-                       // populate up or down TreeMaps for the trips
-                       if (topTrip) upTrip.put(currentTime, timeLocation);
-                       else downTrip.put(currentTime, timeLocation);
-                   }
-                   currentTime++;
+                    if ((currentTime % 1000) == 0) {
+                        // use the rate of change and time to update the lat / lon / and distance
+                        double currentLat = startLat + (currentTime - startTime) * latRate;
+                        double currentLon = startLon + (currentTime - startTime) * lonRate;
+                        double currentDist = cumDistance + (currentTime - startTime) * distRate;
+                        LocationDistance locationDistance = new LocationDistance(
+                                (int) Math.round(currentLat),
+                                (int) Math.round(currentLon),
+                                (int) Math.round(currentDist) );
+                        // populate up or down TreeMaps for the trips
+                        if (topTrip) upTrip.put(currentTime, locationDistance);
+                        else downTrip.put(currentTime, locationDistance);
+                    }
+                    currentTime++;
                 }
                 cumDistance += Math.round(distance);
                 //Log.d(TAG, "Cum. Distance: " + cumDistance);
@@ -423,7 +289,6 @@ public class TripCompareView extends View {
                 if (cumTime >= MAX_DURATION)
                     break;
             }
-
             return "Finished build";
         }
 
@@ -444,11 +309,12 @@ public class TripCompareView extends View {
         }
     }
 
-    private static final class TimeLocation {
+    // stored in the treemap along with an associated timestamp
+    public final class LocationDistance {
         private final int lat;
         private final int lon;
         private final int distance;
-        TimeLocation(int lat, int lon, int distance) {
+        LocationDistance(int lat, int lon, int distance) {
             this.lat = lat;
             this.lon = lon;
             this.distance = distance;
@@ -462,14 +328,42 @@ public class TripCompareView extends View {
         public int getDistance() {
             return distance;
         }
-
     }
 
-    private static class LongComparator implements Comparator<Long> {
+    public static class LongComparator implements Comparator<Long> {
         @Override
         public int compare(Long a, Long b) {
             return a < b ? -1 : a.equals(b) ? 0 : 1;
         }
     }
 
+    public void setUpDistance(float upDistance) {
+        this.upDistance = upDistance;
+    }
+    public void setDownDistance(float downDistance) {
+        this.downDistance = downDistance;
+    }
+
+    public int getTIME_INCR() {
+        return TIME_INCR;
+    }
+    public int getMIN_TIME_INCR() {
+        return MIN_TIME_INCR;
+    }
+    public long getMAX_DURATION() {
+        return MAX_DURATION;
+    }
+
+    public LatLng getFirstLocation1() {
+        return firstLocation1;
+    }
+    public LatLng getLastLocation1() {
+        return lastLocation1;
+    }
+    public LatLng getFirstLocation2() {
+        return firstLocation2;
+    }
+    public LatLng getLastLocation2() {
+        return lastLocation2;
+    }
 }

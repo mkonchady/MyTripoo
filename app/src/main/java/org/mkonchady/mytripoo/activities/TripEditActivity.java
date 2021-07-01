@@ -100,13 +100,14 @@ public class TripEditActivity extends Activity implements OnMapReadyCallback {
         SummaryProvider.Summary summary = summaryDB.getSummary(context, trip_id);
 
         NUM_SEGMENTS = summaryDB.getSegmentCount(context, trip_id);
-        if ((NUM_SEGMENTS > Constants.MAX_SEGMENTS) || (summaryDB.isImported(context, trip_id))) {
-            NUM_SEGMENTS = 1;
+        //if ((NUM_SEGMENTS > Constants.MAX_SEGMENTS) || (summaryDB.isImported(context, trip_id))) {
+        if ((NUM_SEGMENTS > Constants.MAX_SEGMENTS) ) {
+        NUM_SEGMENTS = 1;
             currentSegment = 1;
         } else {
             currentSegment = Constants.ALL_SEGMENTS;
         }
-        ZOOM = calcZoom(summary.getDistance());
+        ZOOM = UtilsMap.calcZoom(summary.getDistance());
 
         // get the detail records for this trip
         details = detailDB.getDetails(context, trip_id);
@@ -153,7 +154,8 @@ public class TripEditActivity extends Activity implements OnMapReadyCallback {
     @Override
     public void onMapReady(final GoogleMap map) {
         gMap = map;
-        centerMap(map);
+        int[] bounds = detailDB.getBoundaries(context, trip_id);
+        UtilsMap.centerMap(map, bounds, ZOOM, context);
         handleTimer(true);
 
         // handle the touch operation
@@ -633,41 +635,6 @@ public class TripEditActivity extends Activity implements OnMapReadyCallback {
         @Override
         protected void onPostExecute(String result) {
         }
-    }
-
-    public void centerMap(GoogleMap map) {
-        int[] bounds = detailDB.getBoundaries(context, trip_id);
-        double north = bounds[0] / Constants.MILLION;
-        double south = bounds[1] / Constants.MILLION;
-        double east = bounds[2] / Constants.MILLION;
-        double west = bounds[3] / Constants.MILLION;
-        LatLng southWest = new LatLng(south, west);
-        LatLng northEast = new LatLng(north, east);
-        LatLngBounds latLngBounds = new LatLngBounds(southWest, northEast);
-        CameraUpdate camera_center = CameraUpdateFactory.newLatLngZoom(latLngBounds.getCenter(), ZOOM);
-
-        CameraUpdate camera_zoom = CameraUpdateFactory.zoomTo(ZOOM);
-        map.moveCamera(camera_center);
-        map.animateCamera(camera_zoom);
-        final int MY_PERMISSIONS_FINE_LOCATION = 10;
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) context,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_FINE_LOCATION);
-        }
-        map.setMyLocationEnabled(true);
-
-    }
-
-    // set the zoom lower for longer trip distances
-    private int calcZoom(float distance) {
-        int zoom;
-        if      (distance < 10 * 1000.0f) zoom = 15;
-        else if (distance < 25 * 1000.0f) zoom = 13;
-        else if (distance < 50 * 1000.0f) zoom = 11;
-        else if (distance < 100 * 1000.0f) zoom = 9;
-        else zoom = 7;
-        return zoom;
     }
 
     // Hashmap to string and string to hashmap utilities

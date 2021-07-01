@@ -117,7 +117,7 @@ public class TripPlaybackActivity extends Activity  implements OnMapReadyCallbac
         new BuildList(this).execute(params1);
 
         currentTime = 0;
-        ZOOM = calcZoom(summary.getDistance());
+        ZOOM = UtilsMap.calcZoom(summary.getDistance());
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -176,7 +176,8 @@ public class TripPlaybackActivity extends Activity  implements OnMapReadyCallbac
     @Override
     public void onMapReady(final GoogleMap map) {
         gMap = map;
-        centerMap(map);
+        int[] bounds = detailDB.getBoundaries(context, trip_id);
+        UtilsMap.centerMap(map, bounds, ZOOM, context);
     }
 
     private class DrawTracks extends AsyncTask<Object, Integer, String> {
@@ -332,42 +333,6 @@ public class TripPlaybackActivity extends Activity  implements OnMapReadyCallbac
             this.TIME_INCR = TIME_INCR;
             currentTime = TIME_INCR;        // start over again if the time increment changes
         }
-    }
-
-    // center the map using the first detail or start location
-    public void centerMap(GoogleMap map) {
-        DetailProvider.Detail detail = detailDB.getDetail(context, trip_id, 1);
-        double north = (detail.getLat() + 0.0001) / Constants.MILLION;
-        double south = (detail.getLat() - 0.0001) / Constants.MILLION;
-        double east  = (detail.getLon() + 0.0001) / Constants.MILLION;
-        double west  = (detail.getLon() - 0.0001) / Constants.MILLION;
-
-        LatLng southWest = new LatLng(south, west);
-        LatLng northEast = new LatLng(north, east);
-        LatLngBounds latLngBounds = new LatLngBounds(southWest, northEast);
-        CameraUpdate camera_center = CameraUpdateFactory.newLatLngZoom(latLngBounds.getCenter(), ZOOM);
-        CameraUpdate camera_zoom = CameraUpdateFactory.zoomTo(ZOOM);
-        map.moveCamera(camera_center);
-        map.animateCamera(camera_zoom);
-        final int MY_PERMISSIONS_FINE_LOCATION = 10;
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) context,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_FINE_LOCATION);
-        }
-        map.setMyLocationEnabled(true);
-
-    }
-
-    // set the zoom lower for longer trip distances
-    private int calcZoom(float distance) {
-        int zoom;
-        if      (distance < 10 * 1000.0f) zoom = 15;
-        else if (distance < 25 * 1000.0f) zoom = 13;
-        else if (distance < 50 * 1000.0f) zoom = 11;
-        else if (distance < 100 * 1000.0f) zoom = 9;
-        else zoom = 7;
-        return zoom;
     }
 
     public int getTrip_id() {

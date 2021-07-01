@@ -29,7 +29,6 @@
                 android:gravity="center_horizontal"/>
         </TableRow>
 
-
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_height="wrap_content"

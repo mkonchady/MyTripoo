@@ -13,11 +13,17 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import android.provider.DocumentsContract;
+import android.provider.Settings;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -57,6 +63,8 @@ import org.mkonchady.mytripoo.utils.UtilsMap;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -65,6 +73,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.os.Environment.isExternalStorageManager;
 import static org.mkonchady.mytripoo.utils.UtilsMap.kmphTomps;
 
 public class TripActivity extends Activity {
@@ -80,6 +91,7 @@ public class TripActivity extends Activity {
     String category;
     SharedPreferences sharedPreferences;
     int localLog = 0;
+    TripActivity tripActivity = null;
     boolean storagePermissionGranted = false;
     boolean copyRunning = false;
     boolean openWeatherRunning = false;
@@ -94,6 +106,7 @@ public class TripActivity extends Activity {
     int rowBackColor;
     int rowSelectColor;
     int rowHighlightColor;
+    final int PERMISSION_REQUEST_CODE = 2234;
     String TAG = "TripActivity";
 
     @Override
@@ -104,6 +117,7 @@ public class TripActivity extends Activity {
         summaryTable = new SummaryDB(SummaryProvider.db);
         tableLayout = findViewById(R.id.triptablelayout);
         inflater = getLayoutInflater();
+        tripActivity = this;
         getDateViews();
         setDateDialogs();
         statusView = this.findViewById(R.id.statusTrip);
@@ -115,16 +129,16 @@ public class TripActivity extends Activity {
         localLog = Integer.parseInt(sharedPreferences.getString(Constants.PREF_DEBUG_MODE, "0"));
 
         // ask for storage permission in Android 6.0+
-        // check if storahe Permission has been granted
+        // check if storage Permission has been granted
         storagePermissionGranted = Constants.preMarshmallow;
-        if (Constants.postMarshmallow && ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED)
+        if (Constants.postMarshmallow &&
+                ContextCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             storagePermissionGranted = true;
 
         if (!storagePermissionGranted) {
             Logger.d(TAG, "Getting Storage Permission", localLog);
             Intent intent = new Intent(getBaseContext(), PermissionActivity.class);
-            intent.putExtra("permission", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            intent.putExtra("permission", WRITE_EXTERNAL_STORAGE);
             startActivityForResult(intent, Constants.PERMISSION_CODE);
         }
 
@@ -533,6 +547,7 @@ public class TripActivity extends Activity {
                 }
             }
         }
+
     }
 
     // fetch the table rows from the DB in the background
@@ -1629,6 +1644,35 @@ public class TripActivity extends Activity {
         String state = Environment.getExternalStorageState();
         return (Environment.MEDIA_MOUNTED.equals(state));
     }
+
+    private boolean checkStoragePermission() {
+        if (Constants.postAndroid10) {
+            return Environment.isExternalStorageManager();
+        } else {
+            return ( (ContextCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
+                    (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED));
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    boolean READ_EXTERNAL_STORAGE = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean WRITE_EXTERNAL_STORAGE = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                    if (READ_EXTERNAL_STORAGE && WRITE_EXTERNAL_STORAGE) {
+                        // perform action when allow permission success
+                    } else {
+                        Toast.makeText(this, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+        }
+    }
+
 
     // given a string timestamp, return the equivalent long value
     private long getTimestamp(String dateText) {

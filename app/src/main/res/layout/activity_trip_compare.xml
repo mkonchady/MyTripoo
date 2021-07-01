@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?android:attr/actionBarSize"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
+
+    <org.mkonchady.mytripoo.views.TripCompareView
+        android:id="@+id/tripCompareView"
+        android:layout_gravity="center_vertical"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:background="@color/White"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="24dp"
+        android:layout_height="30dp"
         android:layout_gravity="top|center"
         android:background="@color/Wheat"
-        android:paddingBottom="2dp"
-        >
+        android:id="@+id/topline"
+        android:paddingBottom="2dp">
 
         <TextView
             android:layout_width="0dp"
@@ -20,8 +33,9 @@
             android:id="@+id/timeTextView"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:gravity="center_horizontal"
+            android:textColor="@color/DarkCyan"
             android:background="@color/Wheat"
-            android:layout_weight="0.2" />
+            android:layout_weight="0.1" />
 
         <TextView
             android:layout_width="0dp"
@@ -29,10 +43,10 @@
             android:text=""
             android:id="@+id/timeDistanceView1"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/darkpurple"
+            android:textColor="@color/darkred"
             android:gravity="end"
             android:background="@color/Wheat"
-            android:layout_weight="0.2" />
+            android:layout_weight="0.3" />
 
         <TextView
             android:layout_width="0dp"
@@ -40,10 +54,10 @@
             android:text=""
             android:id="@+id/timeDistanceView2"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/darkblue"
+            android:textColor="@color/darkgreen"
             android:background="@color/Wheat"
             android:gravity="end"
-            android:layout_weight="0.2" />
+            android:layout_weight="0.3" />
 
         <TextView
             android:layout_width="0dp"
@@ -54,25 +68,15 @@
             android:textColor="@color/darkpurple"
             android:background="@color/Wheat"
             android:gravity="end"
-            android:layout_weight="0.2" />
-
+            android:layout_weight="0.3" />
     </LinearLayout>
-
-    <org.mkonchady.mytripoo.views.TripCompareView
-        android:id="@+id/tripCompareView"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_height="464dp"
-        android:layout_width="match_parent"
-        android:background="@color/White"
-         />
-
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_gravity="bottom|center"
         android:paddingTop="0dp"
-        android:layout_height="60dp">
+        android:layout_height="35dp"
+        android:id="@+id/buttons">
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -81,7 +85,7 @@
             android:src="@drawable/playr_fast"
             android:background="@color/white"
             android:padding="5dp"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:onClick="rreverseCompare"
             android:layout_weight="0.20" />
 
@@ -91,7 +95,7 @@
             android:id="@+id/playrSlowButton"
             android:src="@drawable/playr_slow"
             android:background="@color/white"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:padding="5dp"
             android:onClick="reverseCompare"
             android:layout_weight="0.20" />
@@ -102,7 +106,7 @@
             android:id="@+id/pause"
             android:src="@drawable/pause"
             android:background="@color/white"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:padding="5dp"
             android:onClick="pauseCompare"
             android:layout_weight="0.20" />
@@ -113,7 +117,7 @@
             android:id="@+id/playfSlowButton"
             android:src="@drawable/playf_slow"
             android:background="@color/white"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:padding="5dp"
             android:onClick="forwardCompare"
             android:layout_weight="0.20" />
@@ -124,9 +128,59 @@
             android:id="@+id/playfFastButton"
             android:src="@drawable/playf_fast"
             android:background="@color/white"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:padding="5dp"
             android:onClick="fforwardCompare"
             android:layout_weight="0.20" />
     </LinearLayout>
-</FrameLayout>
+
+    <RelativeLayout
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:id="@+id/relative">
+        <View
+            android:id="@+id/line_sep1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:paddingTop="0dp"
+            android:background="#E91E63"
+            />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/line_sep1"
+            android:name="org.mkonchady.mytripoo.views.MapsFragment1"
+            map:liteMode="true"/>
+
+        <View
+            android:id="@+id/line_sep2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/map1"
+            android:paddingTop="0dp"
+            android:background="#E91E63"
+            />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map2"
+            android:name="org.mkonchady.mytripoo.views.MapsFragment2"
+            android:layout_below="@+id/line_sep2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            map:liteMode="true"/>
+        <View
+            android:id="@+id/line_sep3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/map2"
+            android:paddingTop="0dp"
+            android:background="#E91E63"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
+</ScrollView>

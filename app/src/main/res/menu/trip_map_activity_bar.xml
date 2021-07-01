@@ -6,8 +6,8 @@
         android:id="@+id/action_map_play"
         android:title="@string/action_map_play"
         android:icon="@drawable/playf_slow"
-        android:showAsAction="ifRoom"
-        app:showAsAction="ifRoom"
+        android:showAsAction="always"
+        app:showAsAction="always"
         tools:ignore="AppCompatResource">
     </item>
 
@@ -15,8 +15,8 @@
         android:id="@+id/action_map_pause"
         android:title="@string/action_map_pause"
         android:icon="@drawable/pause"
-        android:showAsAction="ifRoom"
-        app:showAsAction="ifRoom"
+        android:showAsAction="always"
+        app:showAsAction="always"
         tools:ignore="AppCompatResource">
     </item>
 
@@ -24,8 +24,8 @@
         android:id="@+id/action_map_reverse"
         android:title="@string/action_map_reverse"
         android:icon="@drawable/playr_slow"
-        android:showAsAction="ifRoom"
-        app:showAsAction="ifRoom"
+        android:showAsAction="always"
+        app:showAsAction="always"
         tools:ignore="AppCompatResource">
     </item>
 

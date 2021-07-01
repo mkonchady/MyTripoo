@@ -153,7 +153,7 @@ public final class Constants {
     public final static boolean prePie =  Build.VERSION.SDK_INT < Build.VERSION_CODES.P; // < 28
     public final static boolean postPie =  Build.VERSION.SDK_INT >= Build.VERSION_CODES.P; // >= 28
     public final static boolean preAndroid10 =  Build.VERSION.SDK_INT < Build.VERSION_CODES.Q; // < 29
-    public final static boolean postAndroid10 =  Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q; // >= 29
+    public final static boolean postAndroid10 =  Build.VERSION.SDK_INT >= Build.VERSION_CODES.R; // >= 30
 
 
     // for activities started from main

@@ -84,7 +84,7 @@ public class TripCurrentActivity extends Activity implements OnMapReadyCallback 
         // assign factor to the largest key
         colorMap = UtilsMap.buildColorRamp();
         factor = colorMap.size();
-        ZOOM = calcZoom(summary.getDistance());
+        ZOOM = UtilsMap.calcZoom(summary.getDistance());
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         follow_trip_id = sharedPreferences.getInt(Constants.PREF_FOLLOW_TRIP, -1);
@@ -106,7 +106,8 @@ public class TripCurrentActivity extends Activity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap map) {
         gMap = map;
-        centerMap(map);
+        int[] bounds = detailDB.getBoundaries(context, trip_id);
+        UtilsMap.centerMap(map, bounds, ZOOM, context);
 
         // handle the touch location
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -159,30 +160,6 @@ public class TripCurrentActivity extends Activity implements OnMapReadyCallback 
         intent.putExtra("remainder", remainder);
         intent.putExtra("percent", percent);
         startActivity(intent);
-    }
-
-
-    public void centerMap(GoogleMap map) {
-        int[] bounds = detailDB.getBoundaries(context, trip_id);
-        double north = bounds[0] / Constants.MILLION;
-        double south = bounds[1] / Constants.MILLION;
-        double east = bounds[2] / Constants.MILLION;
-        double west = bounds[3] / Constants.MILLION;
-        LatLng southWest = new LatLng(south, west);
-        LatLng northEast = new LatLng(north, east);
-        LatLngBounds latLngBounds = new LatLngBounds(southWest, northEast);
-        CameraUpdate camera_center = CameraUpdateFactory.newLatLngZoom(latLngBounds.getCenter(), ZOOM);
-
-        CameraUpdate camera_zoom = CameraUpdateFactory.zoomTo(ZOOM);
-        map.moveCamera(camera_center);
-        map.animateCamera(camera_zoom);
-        final int MY_PERMISSIONS_FINE_LOCATION = 10;
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) context,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_FINE_LOCATION);
-        }
-        map.setMyLocationEnabled(true);
     }
 
     private class DrawTrack extends AsyncTask<Object, Integer, String> {
@@ -278,18 +255,6 @@ public class TripCurrentActivity extends Activity implements OnMapReadyCallback 
         if (index == factor) index--;   // keep the index within array bounds
         return colorMap.get(index);
     }
-
-    // set the zoom lower for longer trip distances
-    private int calcZoom(float distance) {
-        int zoom;
-        if (distance < 10 * 1000.0f) zoom = 15;
-        else if (distance < 25 * 1000.0f) zoom = 13;
-        else if (distance < 50 * 1000.0f) zoom = 11;
-        else if (distance < 100 * 1000.0f) zoom = 9;
-        else zoom = 7;
-        return zoom;
-    }
-
 
     // called from the stop button
     public void cancelTimer() {

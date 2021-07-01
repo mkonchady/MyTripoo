@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
+    android:gravity="fill"
     android:keepScreenOn="true"
-    android:background="@color/white"
+    android:background="@color/Beige"
     android:paddingTop="?android:attr/actionBarSize"
     tools:context=".activities.MainActivity"
     android:orientation="vertical">
@@ -14,7 +15,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@color/white"
+        android:background="@color/Beige"
         android:src="@drawable/trip_analyzer"/>
 
     <TextView
@@ -29,9 +30,10 @@
         android:background="@drawable/round_rectangle_status"
         android:layout_gravity="center_horizontal"/>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        >
         <GridView
             android:numColumns="3"
             android:columnWidth="100dp"
@@ -51,7 +53,7 @@
         android:scaleType="fitCenter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/Beige"
         android:contentDescription="@string/start"
         android:text="@string/start"
         android:padding="12dp"

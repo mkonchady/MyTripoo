@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Environment;
 
+import org.mkonchady.mytripoo.Constants;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
@@ -34,6 +36,9 @@ public class FileDialog {
         this.activity = activity;
         if (!path.exists())
             path = Environment.getExternalStorageDirectory();
+        if (Constants.postAndroid10)
+            path = activity.getExternalFilesDir("");
+
         setFileEndsWith(suffixes);
         loadFileList(path);
         showing = true;
@@ -98,7 +103,8 @@ public class FileDialog {
             FilenameFilter filter = new FilenameFilter() {
                 public boolean accept(File dir, String filename) {
                     File sel = new File(dir, filename);
-                    if (!sel.canRead()) return false;
+                    if (!sel.canRead())
+                        return false;
                     else {
                         boolean endsWith = false;
                         for (String suffix: fileEndsWith)

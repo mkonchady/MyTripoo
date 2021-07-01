@@ -26,10 +26,12 @@ public final class UtilsDate {
     final private static String dateFormat = "MMM dd, yyyy";
     final private static String dateTimeFormat = "MMM dd, HH:mm";
     final private static String dateTimeSecFormat = "MMM dd, yyyy HH:mm:ss";
+    final private static String dateTimeDeciSecFormat = "MMM dd, yyyy HH:mm:ss.SS";
     final private static String timeFormat = "HH:mm:ss";
     final private static String shortTimeFormat = "mm:ss";
     final private static SimpleDateFormat sdf_date_time = new SimpleDateFormat(dateTimeFormat, locale);
     final private static SimpleDateFormat sdf_date_time_sec = new SimpleDateFormat(dateTimeSecFormat, locale);
+    final private static SimpleDateFormat sdf_date_time_deci_sec = new SimpleDateFormat(dateTimeDeciSecFormat, locale);
     final private static SimpleDateFormat sdf_date      = new SimpleDateFormat(dateFormat, locale);
     final private static SimpleDateFormat sdf_time      = new SimpleDateFormat(timeFormat, locale);
     final private static SimpleDateFormat sdf_short_time = new SimpleDateFormat(shortTimeFormat, locale);
@@ -119,8 +121,12 @@ public final class UtilsDate {
 
     public static String getDateTimeSec(long millis, int lat, int lon) {
         sdf_date_time_sec.setTimeZone(getTZ(lat, lon));
-
         return (sdf_date_time_sec.format(millis));
+    }
+
+    public static String getDateTimeDeciSec(long millis, int lat, int lon) {
+        sdf_date_time_deci_sec.setTimeZone(getTZ(lat, lon));
+        return (sdf_date_time_deci_sec.format(millis));
     }
 
     public static String getDateTime(long millis, int lat, int lon) {

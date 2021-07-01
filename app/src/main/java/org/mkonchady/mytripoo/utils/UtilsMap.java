@@ -1,7 +1,10 @@
 package org.mkonchady.mytripoo.utils;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.GnssStatus;
@@ -9,8 +12,15 @@ import android.location.Location;
 import android.preference.PreferenceManager;
 import android.util.SparseIntArray;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -601,7 +611,49 @@ import org.mkonchady.mytripoo.gps.Satellite;
         return NW;
     }
 
-     public static LocationRequest getLocationRequest(Context context) {
+    public static void centerMap(GoogleMap map, int lat, int lon, int ZOOM, Context context) {
+        final int LAT_INCR = 150; // increment of latitude to center map
+        final int LON_INCR = 100; // increment of longiture to center map
+        int[] bounds = new int[]{ lat + ZOOM * LAT_INCR, lat - ZOOM * LAT_INCR, lon + ZOOM * LON_INCR, lon - ZOOM * LON_INCR };
+        centerMap(map, bounds, ZOOM, context);
+    }
+
+    public static void centerMap(GoogleMap map, int[] bounds, int ZOOM, Context context) {
+
+        double north = bounds[0] / Constants.MILLION;
+        double south = bounds[1] / Constants.MILLION;
+        double east = bounds[2] / Constants.MILLION;
+        double west = bounds[3] / Constants.MILLION;
+        LatLng southWest = new LatLng(south, west);
+        LatLng northEast = new LatLng(north, east);
+        LatLngBounds latLngBounds = new LatLngBounds(southWest, northEast);
+
+        CameraUpdate camera_center = CameraUpdateFactory.newLatLngZoom(latLngBounds.getCenter(), ZOOM);
+        CameraUpdate camera_zoom = CameraUpdateFactory.zoomTo(ZOOM);
+        map.moveCamera(camera_center);
+        map.animateCamera(camera_zoom);
+
+        final int MY_PERMISSIONS_FINE_LOCATION = 10;
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_FINE_LOCATION);
+        }
+        map.setMyLocationEnabled(true);
+    }
+
+    // set the zoom lower for longer trip distances
+    public static int calcZoom(float distance) {
+        int zoom;
+        if      (distance < 10 * 1000.0f) zoom = 15;
+        else if (distance < 25 * 1000.0f) zoom = 13;
+        else if (distance < 50 * 1000.0f) zoom = 11;
+        else if (distance < 100 * 1000.0f) zoom = 9;
+        else zoom = 7;
+        return zoom;
+    }
+
+    public static LocationRequest getLocationRequest(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         LocationRequest mLocationRequest = LocationRequest.create();
         String locationProvider = sharedPreferences.getString(Constants.PREF_LOCATION_PROVIDER, "");
